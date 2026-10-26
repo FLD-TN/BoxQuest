@@ -1,0 +1,304 @@
+# Toàn bộ chuỗi hiển thị của BoxQuest. Hỗ trợ mã màu '&' và hex '&#rrggbb'.
+
+command:
+  no-permission: '&cBạn không có quyền dùng lệnh này.'
+  player-only: '&cLệnh này chỉ dùng trong game.'
+  not-loaded: '&cDữ liệu nhiệm vụ của bạn chưa tải được, hãy thử vào lại server.'
+  reloaded: '&aĐã nạp lại BoxQuest: &f{loaded} &anhiệm vụ, &f{skipped} &abị bỏ qua (xem log).'
+  reload-failed: '&cquests.yml lỗi cú pháp, giữ nguyên danh sách nhiệm vụ cũ. Xem log.'
+  # /quest offer và /quest assign (thường chạy bằng console từ NPC). {label} là lệnh đã gõ (quest, nv...)
+  usage-offer: '&cDùng: /{label} offer <người chơi> <mã nhiệm vụ>'
+  usage-assign: '&cDùng: /{label} assign <người chơi> <mã nhiệm vụ>'
+  player-not-found: '&cKhông tìm thấy người chơi &f{player} &c(phải đang online).'
+  quest-not-found: '&cKhông có nhiệm vụ nào mã &f{id}&c.'
+  target-not-loaded: '&cDữ liệu nhiệm vụ của &f{player} &cchưa tải được.'
+  assigned: '&aĐã giao nhiệm vụ {quest} &acho &f{player}&a.'
+  assign-busy: '&f{player} &cđang làm nhiệm vụ khác, không giao được.'
+
+# Thanh tiến độ dùng chung cho menu và action bar
+progress-bar:
+  length: 20
+  filled: '&a&l|'
+  empty: '&7&l|'
+
+menu:
+  title: '&8Nhiệm vụ'
+
+  # Đầu người chơi ở giữa hàng trên cùng: nhiệm vụ đang giữ và các quy tắc chung.
+  # Placeholder: {player}, {status} (một trong ba dòng status-* bên dưới), {completions}
+  head:
+    name: '&e{player}'
+    lore:
+      - '&f• &7Nhiệm vụ hiện tại: {status}'
+      - ''
+      - '&f• &7Mỗi lần chỉ nhận được 1 nhiệm vụ'
+      - '&f• &7Hoàn thành sẽ nhận phần thưởng kèm theo'
+      - '&f• &7Huỷ nhiệm vụ sẽ mất toàn bộ tiến độ'
+    # {quest} {count} {amount} {percent}
+    status-active: '{quest} &8(&f{count}&7/&f{amount}&8)'
+    status-none: '&7chưa nhận'
+    # {id}: mã nhiệm vụ đã bị xoá khỏi quests.yml
+    status-missing: '&ckhông còn tồn tại &8({id})'
+    # Thêm vào cuối lore khi nhiệm vụ đang giữ không còn tồn tại
+    missing-lore:
+      - ''
+      - '&8( &cChuột phải để huỷ nhiệm vụ &8)'
+
+  # Hàng dưới cùng: trang trước, số trang, trang sau. Hết trang thì nút trước/sau là ô viền.
+  page:
+    # {page} {pages} {total}
+    info:
+      name: '&fTrang {page}&7/&f{pages}'
+      lore:
+        - ' '
+    # {page}: trang sẽ mở khi bấm
+    previous-page:
+      name: '&fTrang trước'
+      lore:
+        - '&8( &eBấm để về trang {page} &8)'
+    next-page:
+      name: '&fTrang sau'
+      lore:
+        - '&8( &eBấm để sang trang {page} &8)'
+
+  # Tên hiển thị của nhiệm vụ đã bị xoá khỏi quests.yml
+  missing-quest-name: '&cNhiệm vụ không còn tồn tại &8({id})'
+
+  # Danh sách nhiệm vụ. Tên item lấy từ 'display' trong quests.yml.
+  # Placeholder: {description} (mô tả trong quests.yml; mỗi dòng mô tả lặp lại cả dòng chứa nó),
+  # {count} {amount} {bar} {percent} {money},
+  # {reward} (dòng 'display' của rewards.commands; mỗi phần thưởng lặp lại cả dòng chứa nó).
+  # Dòng chứa {money} bị bỏ khi nhiệm vụ không có Xu (money = 0); dòng chứa {reward} bị bỏ khi không có display nào.
+  # Áp dụng cả cho accept-confirm.info.lore.
+  quest:
+    # Chưa nhận nhiệm vụ nào: hiện đúng block của mine
+    available:
+      lore:
+        - '&7Trạng thái: &7Chưa nhận'
+        - ''
+        - '&7Mô tả:'
+        - '&7• &f{description}'
+        - ''
+        - '&7Phần thưởng:'
+        - '&7• &a{money}$'
+        - '&7• {reward}'
+        - ''
+        - '&8( &eChuột trái để nhận nhiệm vụ &8)'
+    # Nhiệm vụ đang làm
+    active:
+      lore:
+        - '&7Trạng thái: &aĐang nhận'
+        - ''
+        - '&7Mô tả:'
+        - '&7• &f{description}'
+        - ''
+        - '&7Tiến độ: &a{count}&7/&a{amount}'
+        - '&7• {bar} &7(&f{percent}%&7)'
+        - ''
+        - '&7Phần thưởng:'
+        - '&7• &a{money}$'
+        - '&7• {reward}'
+        - ''
+        - '&8( &cChuột phải để huỷ nhiệm vụ &8)'
+    # Đang làm nhiệm vụ khác: hiện icon khoá (gui.icons.locked)
+    locked:
+      lore:
+        - '&7Trạng thái: &cĐã khoá'
+        - ''
+        - '&7Mô tả:'
+        - '&7• &f{description}'
+        - ''
+        - '&7Phần thưởng:'
+        - '&7• &a{money}$'
+        - '&7• {reward}'
+        - ''
+        - '&cChỉ được nhận 1 nhiệm vụ cùng lúc.'
+        - '&7Huỷ nhiệm vụ hiện tại để nhận nhiệm vụ này.'
+    # Nhiệm vụ đang giữ đã bị xoá khỏi quests.yml: các nhiệm vụ khác cũng bị khoá
+    blocked:
+      lore:
+        - '&7Trạng thái: &cĐã khoá'
+        - ''
+        - '&7Mô tả:'
+        - '&7• &f{description}'
+        - ''
+        - '&7Phần thưởng:'
+        - '&7• &a{money}$'
+        - '&7• {reward}'
+        - ''
+        - '&cNhiệm vụ hiện tại không còn tồn tại.'
+        - '&7Chuột phải vào đầu của bạn phía trên để huỷ.'
+
+# Bốn nút tuỳ chỉnh ở hai góc hàng dưới cùng: Tự động nhận lại, Âm thanh bên trái; Bossbar, Thanh tiến độ bên phải
+toggle:
+  color-on: '&a'
+  color-off: '&c'
+  status-line: '&f• &7Trạng thái: {status}'
+  status-on: '&aĐang bật'
+  status-off: '&cĐang tắt'
+  action-on: '&8( &eBấm để tắt &8)'
+  action-off: '&8( &eBấm để bật &8)'
+  auto-repeat:
+    name: '&8[&bTự động nhận lại&8]'
+    description:
+      - '&f• &7Tự nhận lại nhiệm vụ ngay khi'
+      - '&f• &7hoàn thành, không cần mở menu.'
+  bossbar:
+    name: '&8[&bBossbar nhiệm vụ&8]'
+    description:
+      - '&f• &7Luôn hiện nhiệm vụ đang làm'
+      - '&F• &7và tiến độ ở đầu màn hình.'
+  actionbar:
+    name: '&8[&bThanh tiến độ&8]'
+    description:
+      - '&f• &7Hiện thanh tiến độ trên action bar'
+      - '&f• &7khi nhận nhiệm vụ và trong lúc đào.'
+  sound:
+    name: '&8[&bÂm thanh&8]'
+    description:
+      - '&f• &7Phát âm thanh khi hoàn thành'
+      - '&f• &7nhiệm vụ.'
+
+cancel-confirm:
+  title: '&8Xác nhận huỷ nhiệm vụ'
+  info:
+    name: '&c&lHuỷ nhiệm vụ?'
+    lore:
+      - '{quest}'
+  confirm:
+    name: '&a✔ Xác nhận huỷ'
+    lore:
+      - '&7Huỷ nhiệm vụ và mất tiến độ.'
+  back:
+    name: '&c✘ Quay lại'
+    lore:
+      - '&7Giữ nguyên nhiệm vụ hiện tại.'
+
+accept-confirm:
+  title: '&8Xác nhận nhận nhiệm vụ'
+  info:
+    name: '&eNhận nhiệm vụ?'
+    lore:
+      - '{quest}'
+      - ''
+      - '&f• &7Mục tiêu: &fĐào {amount} block'
+      - '&f• &7Phần thưởng: &a{money}$'
+      - '&f• &7Phần thưởng: {reward}'
+  confirm:
+    name: '&a✔ Nhận nhiệm vụ'
+    lore:
+      - '&7Bắt đầu {quest}'
+  back:
+    name: '&c✘ Quay lại'
+    lore:
+      - '&7Trở về danh sách nhiệm vụ.'
+  # Thay cho 'back' khi màn hình được mở từ NPC (/quest offer): bấm là đóng
+  close:
+    name: '&c✘ Không nhận'
+    lore:
+      - '&7Đóng và không nhận nhiệm vụ này.'
+
+# Bossbar tiến độ (tắt được bằng nút Bossbar trong menu). Màu và kiểu thanh chỉnh trong config.yml.
+# Placeholder: {quest} {count} {amount} {percent} {completions}
+bossbar:
+  title: '{quest} &8| &f{count}&7/&f{amount} &7(&b{percent}%&7)'
+
+feedback:
+  # Nhận nhiệm vụ (từ menu, NPC hoặc /quest assign). {quest} là đúng 'display' trong quests.yml, {amount}
+  accept: '&aĐã nhận nhiệm vụ {quest}&a. &7Bấm &f/quest &7để xem tiến độ hoặc huỷ nhiệm vụ.'
+  # Không nhận được vì đang làm đúng nhiệm vụ này. {quest}
+  accept-same: '&eBạn đang làm nhiệm vụ {quest} &erồi. &7Bấm &f/quest &7để xem tiến độ.'
+  # Không nhận được vì đang làm nhiệm vụ khác. {quest} nhiệm vụ đang làm, {target} nhiệm vụ muốn nhận
+  accept-busy: '&cBạn đang làm nhiệm vụ {quest}&c. &7Hoàn thành hoặc huỷ trong &f/quest &7trước khi nhận nhiệm vụ mới.'
+  # Thanh tiến độ trên action bar (tắt được bằng nút Thanh tiến độ trong menu)
+  progress: '{quest} &8| {bar} &8| &f{count}&7/&f{amount}'
+  # Tin nhắn chat khi hoàn thành — luôn gửi, chỉ người chơi đó thấy.
+  # Placeholder: {quest}, {money} (số Xu của lần hoàn thành, đã nhân boost BoxCore — mặc định không dùng)
+  complete-repeat: '&a&l✔ &aĐã hoàn thành nhiệm vụ {quest}&a. &7Đã tự động nhận lại nhiệm vụ.'
+  complete-no-repeat: '&a&l✔ &aĐã hoàn thành nhiệm vụ {quest}&a. &7Mở &f/quest &7để nhận nhiệm vụ mới.'
+  # Dòng riêng báo số Xu đã nhận, gửi ngay sau tin hoàn thành. Xu được cộng thẳng qua Vault nên plugin kinh tế
+  # KHÔNG tự báo. Chỉ gửi khi đã cộng thành công và số Xu > 0. Để '' để tắt.
+  # Placeholder: {money} (đã nhân boost BoxCore, ví dụ 3.750), {quest}
+  money: '&8(&#33FD42&lB&#44F651&lo&#55EF60&lx&#65E96F&lP&#76E27E&lv&#87DB8D&lP&8) &aBạn đã nhận được {money}$'
+
+# ------------------------------------------------------------------
+# Thông báo ghi ra console/log. Chuỗi thuần (mã màu sẽ bị bỏ).
+# ------------------------------------------------------------------
+log:
+  error-repeated: ' (lặp thêm {count} lần trong {seconds} giây qua)'
+  messages-default-failed: 'Không đọc được messages.yml mặc định: {error}'
+  errors:
+    count-block: 'Lỗi khi đếm block'
+    menu-click: 'Lỗi khi xử lý click menu'
+    menu-close: 'Lỗi khi đóng menu'
+    menu-open: 'Lỗi khi mở menu'
+    menu-refresh: 'Lỗi khi cập nhật menu'
+    player-load: 'Lỗi khi nạp dữ liệu người chơi'
+    player-quit-menu: 'Lỗi khi xoá người xem menu'
+    player-quit-feedback: 'Lỗi khi xoá bộ đếm phản hồi'
+    player-quit-bossbar: 'Lỗi khi xoá bossbar của người chơi thoát'
+    bossbar-task: 'Lỗi trong task cập nhật bossbar'
+    player-quit-save: 'Lỗi khi lưu dữ liệu người chơi thoát'
+    flush-task: 'Lỗi trong task lưu định kỳ'
+    flush-async: 'Lỗi khi ghi dữ liệu async'
+    quests-load: 'Lỗi khi nạp quests.yml'
+    actionbar-task: 'Lỗi trong task hiển thị thanh tiến độ'
+  database:
+    open-failed: 'Không mở được database, tắt BoxQuest'
+    mkdir-failed: 'Không tạo được thư mục {dir}'
+    driver-missing: 'Không tìm thấy driver SQLite'
+    load-failed: 'Không tải được dữ liệu nhiệm vụ của {uuid}'
+    closed: 'Database đã đóng, không ghi được {count} bản ghi.'
+    write-failed: 'Lỗi ghi {count} bản ghi nhiệm vụ'
+    lost: 'Không ghi lại được tiến độ của {count} người chơi đã thoát ({uuids}): mất tiến độ từ lần lưu trước của họ.'
+    close-failed: 'Lỗi đóng database'
+    pruned: 'Dọn {count} bản ghi của người chơi đã offline còn sót trong RAM.'
+    migrated-bossbar: 'Đã thêm cột show_bossbar vào database (bossbar BẬT cho mọi người chơi cũ).'
+  config:
+    invalid-sound: 'Âm thanh không hợp lệ trong config.yml: {value} — dùng {fallback}'
+    invalid-material: 'Material không hợp lệ trong config.yml: {value} — dùng {fallback}'
+    invalid-option: 'Giá trị không hợp lệ trong config.yml: {key} = {value} — dùng {fallback}'
+  region:
+    multiple-worlds: "Region '{region}' có ở nhiều world, chỉ dùng world đầu tiên."
+    not-cuboid: "Region '{region}' không phải hình hộp, dùng hộp bao ngoài của nó."
+  quest:
+    file-failed: 'quests.yml không đọc được, giữ nguyên {count} nhiệm vụ đang có: {error}'
+    no-section: "quests.yml không có mục 'quests'."
+    skipped: "Bỏ qua quest '{id}': {reason}"
+    loaded: 'Nạp nhiệm vụ: {loaded} thành công, {skipped} bị bỏ qua.'
+    invalid-icon: "Quest '{id}': icon không hợp lệ ({value}), dùng STONE."
+    invalid-block: "Quest '{id}': bỏ block không hợp lệ '{value}'."
+    duplicate-id: "Quest id '{id}' bị trùng, giữ mục đầu tiên và bỏ mục sau."
+    unknown-placeholder: "Nhiệm vụ '{quest}': placeholder lạ {placeholder} trong rewards.commands[{index}], giữ nguyên văn"
+    no-reward: "Nhiệm vụ '{quest}' không có phần thưởng nào (money = 0, không có lệnh)"
+    removed: "Quest '{id}' đã bị xoá khỏi config. Tiến độ của người chơi vẫn giữ trong database; menu hiện \"nhiệm vụ không còn tồn tại\" kèm nút bỏ nhiệm vụ."
+    amount-changed: "Quest '{id}': amount đổi {old} -> {new}. Tiến độ hiện tại được giữ; ai có tiến độ >= {new} sẽ hoàn thành ở lần đào kế tiếp."
+    reason:
+      not-section: 'không phải một mục cấu hình'
+      amount: 'amount phải lớn hơn 0'
+      money: 'rewards.money không được âm'
+      no-objective: "thiếu mục 'objective'"
+      objective-type: 'loại objective không hỗ trợ: {type}'
+      no-region: 'thiếu objective.region hoặc objective.regions'
+      region-invalid: 'objective.{key} không hợp lệ (cần tên region, hoặc danh sách tên region)'
+      region-missing: "region '{region}' không tồn tại trong WorldGuard"
+      no-blocks: 'objective.blocks rỗng hoặc không có block hợp lệ'
+      commands-type: 'rewards.commands phải là một danh sách'
+      commands-count: 'rewards.commands tối đa 10 lệnh'
+      command-entry: "rewards.commands[{index}] không hợp lệ (cần chuỗi, hoặc map có 'command')"
+      command-empty: 'rewards.commands[{index}].command rỗng hoặc quá dài'
+      command-boost: 'rewards.commands[{index}]: {boost:…} phải là số nguyên từ 1 đến 10^12'
+  boxcore:
+    hooked: 'Đã kết nối BoxCore: phần thưởng Xu được nhân theo boost "quest".'
+    absent: 'Không có BoxCore: phần thưởng Xu không nhân boost (hệ số 1).'
+    no-service: 'BoxCore đang bật nhưng chưa đăng ký BoostService — hệ số boost là 1.'
+    api-failed: 'Có BoxCore nhưng không nạp được API của nó — tắt boost (hệ số 1).'
+  reward:
+    no-economy: 'Không tìm thấy plugin kinh tế qua Vault — người chơi sẽ không nhận được Xu!'
+    hooked: 'Đã kết nối kinh tế: {economy}'
+    deposit-no-economy: 'Chưa trả {money} Xu cho {player} ({uuid}): không có plugin kinh tế. Cần đền bằng tay.'
+    deposit-failed: 'Trả {money} Xu cho {player} ({uuid}) thất bại: {error}. Cần đền bằng tay.'
+    save-failed: "Không ghi được lần hoàn thành '{quest}' của {player} — chưa tính lần hoàn thành này, chưa trả {money} Xu và lệnh thưởng; sẽ thử lại ở block kế tiếp."
+    command-failed: "Lệnh thưởng của '{quest}' cho {player} ({uuid}) thất bại: /{command} ({error}). Cần chạy lại bằng tay."
+    command-rejected: 'lệnh không tồn tại hoặc không được xử lý'
+    boost-overflow: "Lệnh thưởng của '{quest}' cho {player}: {boost:N} x {multiplier} tràn số, dùng {max}. Lệnh: /{command}"

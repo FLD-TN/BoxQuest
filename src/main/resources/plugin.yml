@@ -1,0 +1,27 @@
+name: BoxQuest
+version: 0.3.1
+author: Dexterityy_
+main: vn.boxpvp.boxquest.BoxQuestPlugin
+api-version: '1.21'
+depend: [WorldGuard, Vault]
+softdepend: [PlaceholderAPI, BoxCore]
+commands:
+  quest:
+    aliases: [nv, nhiemvu]
+    description: Mở menu nhiệm vụ
+permissions:
+  boxquest.use:
+    description: Mở menu và làm nhiệm vụ
+    default: true
+  boxquest.reload:
+    description: Nạp lại cấu hình
+    default: op
+  boxquest.assign:
+    description: /quest offer và /quest assign (giao nhiệm vụ cho người chơi, dùng cho NPC)
+    default: op
+  boxquest.admin:
+    description: Toàn quyền quản trị
+    default: op
+    children:
+      boxquest.reload: true
+      boxquest.assign: true

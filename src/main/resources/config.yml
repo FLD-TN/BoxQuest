@@ -1,0 +1,61 @@
+# Giá trị mặc định cho tài khoản MỚI (chưa có dòng trong database).
+# Đổi các giá trị này KHÔNG ảnh hưởng người chơi đã tồn tại.
+defaults:
+  auto-repeat: false
+  show-actionbar: false
+  sound: true
+  show-bossbar: true
+
+actionbar:
+  # mining = chỉ hiện thanh tiến độ khi đang đào, ngừng đào thì tự ẩn (khuyên dùng, không đè action bar
+  #          của plugin khác lúc PvP / đứng yên)
+  # always = luôn hiện khi đang có nhiệm vụ
+  mode: mining
+  # (mode: mining) Ngừng đào bao nhiêu giây thì ẩn thanh tiến độ
+  hide-after-seconds: 3
+  # Action bar của Minecraft tự mờ sau ~3 giây nên thanh được gửi lại mỗi N tick khi đang hiện
+  # (20 tick = 1 giây, tối đa 40). Không cần chỉnh.
+  refresh-ticks: 10
+
+bossbar:
+  # Bossbar luôn hiện khi người chơi đang có nhiệm vụ (tắt/bật riêng từng người trong menu).
+  # Màu: PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE.
+  # BoxCore đang dùng YELLOW (boost mining) và BLUE (boost quest), nên mặc định là GREEN để không lẫn.
+  color: GREEN
+  # Kiểu thanh: PROGRESS (liền), NOTCHED_6, NOTCHED_10, NOTCHED_12, NOTCHED_20 (chia vạch)
+  style: PROGRESS
+  # Cập nhật bossbar tối đa mỗi N tick khi đang đào (1-20). Nhận, huỷ, hoàn thành luôn cập nhật ngay.
+  update-ticks: 5
+
+sound:
+  complete: ENTITY_PLAYER_LEVELUP
+  cooldown-seconds: 3
+
+offer:
+  # /quest offer (NPC): bấm NPC liên tục chỉ mở màn hình xác nhận / báo lỗi một lần trong khoảng này.
+  # Tính riêng từng người chơi, đơn vị giây (cho phép số lẻ, ví dụ 1.5). 0 = tắt.
+  cooldown-seconds: 1
+
+storage:
+  flush-interval-seconds: 30
+
+gui:
+  # Khung viền ngoài của mọi menu
+  border: CYAN_STAINED_GLASS_PANE
+  # Ô trang trí bên trong màn hình xác nhận
+  filler: GRAY_STAINED_GLASS_PANE
+  # Icon của các nút
+  icons:
+    auto-repeat: REPEATER
+    actionbar: OAK_SIGN
+    sound: NOTE_BLOCK
+    bossbar: DRAGON_HEAD
+    cancel: BARRIER
+    # Nhiệm vụ không nhận được vì đang làm nhiệm vụ khác
+    locked: BARRIER
+    confirm: LIME_CONCRETE
+    back: RED_CONCRETE
+    # Phân trang ở giữa hàng dưới menu /quest
+    page: PAPER
+    previous-page: ARROW
+    next-page: ARROW

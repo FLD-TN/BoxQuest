@@ -1,0 +1,31 @@
+# Mỗi nhiệm vụ là một mục config. Menu hiển thị tối đa 21 nhiệm vụ, xếp theo thứ tự trong file (ô 10-16, 19-25, 28-34).
+# description: mô tả hiện trong menu. Một dòng, hoặc nhiều dòng dạng danh sách. Hỗ trợ mã màu.
+# region: tên region WorldGuard của khu mine (phải là vùng hình hộp).
+# blocks: danh sách trắng loại block được đếm.
+# Region không tồn tại -> quest bị bỏ qua, có cảnh báo trong log.
+quests:
+  mine-t3:
+    display: '&aĐào Mine T3'
+    icon: STONE
+    description: 'Đào x5.000 block đá ở /warp mine'
+    objective:
+      type: MINE_BLOCK
+      region: mine_cap_3
+      blocks: [STONE, COBBLESTONE]
+    amount: 5000
+    rewards:
+      money: 20000
+
+  mine-t5:
+    display: '&bĐào Mine T5'
+    icon: IRON_ORE
+    description:
+      - 'Đào x7.000 quặng sắt'
+      - 'ở /warp mine'
+    objective:
+      type: MINE_BLOCK
+      region: mine_cap_5
+      blocks: [IRON_ORE, DEEPSLATE_IRON_ORE]
+    amount: 7000
+    rewards:
+      money: 42000

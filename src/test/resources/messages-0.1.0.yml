@@ -1,0 +1,252 @@
+# Toàn bộ chuỗi hiển thị của BoxQuest. Hỗ trợ mã màu '&' và hex '&#rrggbb'.
+
+command:
+  no-permission: '&cBạn không có quyền dùng lệnh này.'
+  player-only: '&cLệnh này chỉ dùng trong game.'
+  not-loaded: '&cDữ liệu nhiệm vụ của bạn chưa tải được, hãy thử vào lại server.'
+  reloaded: '&aĐã nạp lại BoxQuest: &f{loaded} &anhiệm vụ, &f{skipped} &abị bỏ qua (xem log).'
+  reload-failed: '&cquests.yml lỗi cú pháp, giữ nguyên danh sách nhiệm vụ cũ. Xem log.'
+
+# Thanh tiến độ dùng chung cho menu và action bar
+progress-bar:
+  length: 20
+  filled: '&a|'
+  empty: '&7|'
+
+menu:
+  title: '&8Nhiệm vụ'
+
+  # Ô giữa hàng trên cùng
+  status:
+    active:
+      name: '&6&lNhiệm vụ đang làm'
+      lore:
+        - '{quest}'
+        - ''
+        - '&7Tiến độ: &f{count}&7/&f{amount} &8({percent}%)'
+        - '{bar}'
+        - ''
+        - '&7Phần thưởng: &e{money} Xu'
+        - '&7Đã hoàn thành: &f{completions} lần'
+    none:
+      name: '&e&lChưa nhận nhiệm vụ'
+      lore:
+        - '&7Chọn một khu mine bên dưới'
+        - '&7để bắt đầu đào.'
+    missing:
+      name: '&c&lNhiệm vụ không còn tồn tại'
+      lore:
+        - '&7Mã nhiệm vụ: &f{id}'
+        - '&7Tiến độ đã lưu: &f{count} block'
+        - ''
+        - '&7Huỷ nhiệm vụ này để nhận nhiệm vụ mới.'
+        - ''
+        - '&8( &cChuột phải để huỷ nhiệm vụ &8)'
+
+  # Tên hiển thị của nhiệm vụ đã bị xoá khỏi quests.yml
+  missing-quest-name: '&cNhiệm vụ không còn tồn tại &8({id})'
+
+  # Danh sách nhiệm vụ. Tên item lấy từ 'display' trong quests.yml.
+  # Placeholder: {description} (mô tả trong quests.yml; mỗi dòng mô tả lặp lại cả dòng chứa nó),
+  # {count} {amount} {bar} {percent} {money}
+  quest:
+    # Chưa nhận nhiệm vụ nào: hiện đúng block của mine
+    available:
+      lore:
+        - '&7Trạng thái: &7Chưa nhận'
+        - ''
+        - '&7Mô tả:'
+        - '&7• &f{description}'
+        - ''
+        - '&7Tiến độ: &a{count}&7/&a{amount}'
+        - '{bar} &7(&f{percent}%&7)'
+        - ''
+        - '&7Phần thưởng:'
+        - '&7• &a${money}'
+        - ''
+        - '&8( &eChuột trái để nhận nhiệm vụ &8)'
+    # Nhiệm vụ đang làm
+    active:
+      lore:
+        - '&7Trạng thái: &aĐang nhận'
+        - ''
+        - '&7Mô tả:'
+        - '&7• &f{description}'
+        - ''
+        - '&7Tiến độ: &a{count}&7/&a{amount}'
+        - '{bar} &7(&f{percent}%&7)'
+        - ''
+        - '&7Phần thưởng:'
+        - '&7• &a${money}'
+        - ''
+        - '&8( &cChuột phải để huỷ nhiệm vụ &8)'
+    # Đang làm nhiệm vụ khác: hiện icon khoá (gui.icons.locked)
+    locked:
+      lore:
+        - '&7Trạng thái: &cĐã khoá'
+        - ''
+        - '&7Mô tả:'
+        - '&7• &f{description}'
+        - ''
+        - '&7Phần thưởng:'
+        - '&7• &a${money}'
+        - ''
+        - '&cChỉ được nhận 1 nhiệm vụ cùng lúc.'
+        - '&7Huỷ nhiệm vụ hiện tại để nhận nhiệm vụ này.'
+    # Nhiệm vụ đang giữ đã bị xoá khỏi quests.yml: các nhiệm vụ khác cũng bị khoá
+    blocked:
+      lore:
+        - '&7Trạng thái: &cĐã khoá'
+        - ''
+        - '&7Mô tả:'
+        - '&7• &f{description}'
+        - ''
+        - '&7Phần thưởng:'
+        - '&7• &a${money}'
+        - ''
+        - '&cNhiệm vụ hiện tại không còn tồn tại.'
+        - '&7Huỷ nhiệm vụ đó ở ô trạng thái phía trên.'
+
+  stats:
+    name: '&e&lThống kê của {player}'
+    lore:
+      - '&7Số lần hoàn thành: &f{completions}'
+      - '&7Tổng Xu đã nhận: &e{money} Xu'
+
+# Ba nút tuỳ chỉnh ở hàng dưới cùng, kèm ô kính báo trạng thái ngay phía trên mỗi nút
+toggle:
+  color-on: '&a&l'
+  color-off: '&c&l'
+  status-line: '&7Trạng thái: {status}'
+  status-on: '&aĐang bật'
+  status-off: '&cĐang tắt'
+  action-on: '&eBấm để tắt'
+  action-off: '&eBấm để bật'
+  indicator-on: '&a&lĐang bật'
+  indicator-off: '&c&lĐang tắt'
+  auto-repeat:
+    name: 'Tự động nhận lại'
+    description:
+      - '&7Tự nhận lại nhiệm vụ ngay khi'
+      - '&7hoàn thành, không cần mở menu.'
+  actionbar:
+    name: 'Thanh tiến độ'
+    description:
+      - '&7Hiện thanh tiến độ trên action bar'
+      - '&7khi nhận nhiệm vụ và trong lúc đào.'
+  sound:
+    name: 'Âm thanh'
+    description:
+      - '&7Phát âm thanh khi hoàn thành'
+      - '&7nhiệm vụ.'
+
+cancel-confirm:
+  title: '&8Xác nhận huỷ nhiệm vụ'
+  info:
+    name: '&c&lHuỷ nhiệm vụ?'
+    lore:
+      - '{quest}'
+      - ''
+      - '&7Bạn sẽ mất &c{count} block &7tiến độ.'
+      - '&7Không thể lấy lại.'
+  confirm:
+    name: '&a&l✔ Xác nhận huỷ'
+    lore:
+      - '&7Huỷ nhiệm vụ và mất tiến độ.'
+  back:
+    name: '&c&l✘ Quay lại'
+    lore:
+      - '&7Giữ nguyên nhiệm vụ hiện tại.'
+
+accept-confirm:
+  title: '&8Xác nhận nhận nhiệm vụ'
+  info:
+    name: '&e&lNhận nhiệm vụ?'
+    lore:
+      - '{quest}'
+      - ''
+      - '&7Mục tiêu: &fĐào {amount} block'
+      - '&7Phần thưởng: &e{money} Xu'
+  confirm:
+    name: '&a&l✔ Nhận nhiệm vụ'
+    lore:
+      - '&7Bắt đầu {quest}'
+  back:
+    name: '&c&l✘ Quay lại'
+    lore:
+      - '&7Trở về danh sách nhiệm vụ.'
+
+feedback:
+  # Thanh tiến độ trên action bar (tắt được bằng nút Thanh tiến độ trong menu)
+  progress: '{quest} &8| {bar} &8| &f{count}&7/&f{amount}'
+  # Tin nhắn chat khi hoàn thành — luôn gửi, chỉ người chơi đó thấy. Số Xu do plugin kinh tế tự thông báo khi trả.
+  # Placeholder: {quest}, {money} (số Xu đã trả, đã nhân boost BoxCore — mặc định không dùng)
+  complete-repeat: '&a&l✔ &aĐã hoàn thành nhiệm vụ {quest}&a. &7Đã tự động nhận lại nhiệm vụ.'
+  complete-no-repeat: '&a&l✔ &aĐã hoàn thành nhiệm vụ {quest}&a. &7Mở &f/quest &7để nhận nhiệm vụ mới.'
+
+# ------------------------------------------------------------------
+# Thông báo ghi ra console/log. Chuỗi thuần (mã màu sẽ bị bỏ).
+# ------------------------------------------------------------------
+log:
+  error-repeated: ' (lặp thêm {count} lần trong {seconds} giây qua)'
+  messages-default-failed: 'Không đọc được messages.yml mặc định: {error}'
+  errors:
+    count-block: 'Lỗi khi đếm block'
+    menu-click: 'Lỗi khi xử lý click menu'
+    menu-close: 'Lỗi khi đóng menu'
+    menu-open: 'Lỗi khi mở menu'
+    menu-refresh: 'Lỗi khi cập nhật menu'
+    player-load: 'Lỗi khi nạp dữ liệu người chơi'
+    player-quit-menu: 'Lỗi khi xoá người xem menu'
+    player-quit-feedback: 'Lỗi khi xoá bộ đếm phản hồi'
+    player-quit-save: 'Lỗi khi lưu dữ liệu người chơi thoát'
+    flush-task: 'Lỗi trong task lưu định kỳ'
+    flush-async: 'Lỗi khi ghi dữ liệu async'
+    quests-load: 'Lỗi khi nạp quests.yml'
+    actionbar-task: 'Lỗi trong task hiển thị thanh tiến độ'
+  database:
+    open-failed: 'Không mở được database, tắt BoxQuest'
+    mkdir-failed: 'Không tạo được thư mục {dir}'
+    driver-missing: 'Không tìm thấy driver SQLite'
+    load-failed: 'Không tải được dữ liệu nhiệm vụ của {uuid}'
+    closed: 'Database đã đóng, không ghi được {count} bản ghi.'
+    write-failed: 'Lỗi ghi {count} bản ghi nhiệm vụ'
+    close-failed: 'Lỗi đóng database'
+    pruned: 'Dọn {count} bản ghi của người chơi đã offline còn sót trong RAM.'
+  config:
+    invalid-sound: 'Âm thanh không hợp lệ trong config.yml: {value} — dùng {fallback}'
+    invalid-material: 'Material không hợp lệ trong config.yml: {value} — dùng {fallback}'
+  region:
+    multiple-worlds: "Region '{region}' có ở nhiều world, chỉ dùng world đầu tiên."
+    not-cuboid: "Region '{region}' không phải hình hộp, dùng hộp bao ngoài của nó."
+  quest:
+    file-failed: 'quests.yml không đọc được, giữ nguyên {count} nhiệm vụ đang có: {error}'
+    no-section: "quests.yml không có mục 'quests'."
+    skipped: "Bỏ qua quest '{id}': {reason}"
+    too-many: 'Có {count} nhiệm vụ nhưng menu chỉ hiển thị {max} nhiệm vụ đầu tiên.'
+    loaded: 'Nạp nhiệm vụ: {loaded} thành công, {skipped} bị bỏ qua.'
+    invalid-icon: "Quest '{id}': icon không hợp lệ ({value}), dùng STONE."
+    invalid-block: "Quest '{id}': bỏ block không hợp lệ '{value}'."
+    duplicate-id: "Quest id '{id}' bị trùng, giữ mục đầu tiên và bỏ mục sau."
+    removed: "Quest '{id}' đã bị xoá khỏi config. Tiến độ của người chơi vẫn giữ trong database; menu hiện \"nhiệm vụ không còn tồn tại\" kèm nút bỏ nhiệm vụ."
+    amount-changed: "Quest '{id}': amount đổi {old} -> {new}. Tiến độ hiện tại được giữ; ai có tiến độ >= {new} sẽ hoàn thành ở lần đào kế tiếp."
+    reason:
+      not-section: 'không phải một mục cấu hình'
+      amount: 'amount phải lớn hơn 0'
+      money: 'rewards.money không được âm'
+      no-objective: "thiếu mục 'objective'"
+      objective-type: 'loại objective không hỗ trợ: {type}'
+      no-region: 'thiếu objective.region'
+      region-missing: "region '{region}' không tồn tại trong WorldGuard"
+      no-blocks: 'objective.blocks rỗng hoặc không có block hợp lệ'
+  boxcore:
+    hooked: 'Đã kết nối BoxCore: phần thưởng Xu được nhân theo boost "quest".'
+    absent: 'Không có BoxCore: phần thưởng Xu không nhân boost (hệ số 1).'
+    no-service: 'BoxCore đang bật nhưng chưa đăng ký BoostService — hệ số boost là 1.'
+    api-failed: 'Có BoxCore nhưng không nạp được API của nó — tắt boost (hệ số 1).'
+  reward:
+    no-economy: 'Không tìm thấy plugin kinh tế qua Vault — người chơi sẽ không nhận được Xu!'
+    hooked: 'Đã kết nối kinh tế: {economy}'
+    deposit-no-economy: 'Chưa trả {money} Xu cho {player} ({uuid}): không có plugin kinh tế. Cần đền bằng tay.'
+    deposit-failed: 'Trả {money} Xu cho {player} ({uuid}) thất bại: {error}. Cần đền bằng tay.'
+    save-failed: "Không ghi được lần hoàn thành '{quest}' của {player} — CHƯA trả {money} Xu để tránh trả hai lần. Cần đền bằng tay."
