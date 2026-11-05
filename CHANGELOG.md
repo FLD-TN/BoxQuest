@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.2
+
+### Thêm mới
+
+- Sự kiện `vn.boxpvp.boxquest.api.QuestCompleteEvent` (kế thừa `PlayerEvent`): bắn mỗi lần người chơi hoàn thành
+  nhiệm vụ, sau khi đã trả thưởng. Có `getQuestId()`, `getCompletions()`, `getReward()`. BoxPet dùng nó để cộng
+  XP cho pet đang thả. Không đổi config, chỉ thay jar.
+
 ## 0.3.1
 
 ### Thay đổi

@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "vn.boxpvp"
-version = "0.3.1"
+version = "0.3.2"
 
 repositories {
     mavenCentral()

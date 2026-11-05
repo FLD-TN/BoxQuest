@@ -75,6 +75,13 @@ public final class QuestService {
                 plugin.rewards().runCommands(player, quest, tenths);
             }
             plugin.feedback().onComplete(player, quest, active, reward, paid);
+            // 0.3.2: báo cho plugin khác (BoxPet); lỗi của plugin nghe không được làm hỏng việc đếm
+            try {
+                org.bukkit.Bukkit.getPluginManager().callEvent(new vn.boxpvp.boxquest.api.QuestCompleteEvent(
+                        player, quest.id(), active.completions(), reward));
+            } catch (Exception e) {
+                plugin.errors().report("quest-complete-event", e);
+            }
         }
         if (!completed) plugin.feedback().onProgress(player, quest, active);
     }
