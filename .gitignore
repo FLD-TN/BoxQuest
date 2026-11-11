@@ -13,3 +13,5 @@ libs/
 *SPEC*.md
 __pycache__/
 *.pyc
+*.bak
+*.bak-*
